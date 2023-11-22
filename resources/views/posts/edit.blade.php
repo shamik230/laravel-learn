@@ -1,5 +1,4 @@
-<x-layout.main>
-    <h1>Edit post</h1>
+<x-layout.main title="Edit post" h1="Edit post">
     <a href="{{route('posts.show', $post->id)}}">Back to post</a>
     <hr>
     <form action="{{route('posts.update', $post->id)}}" method="POST">

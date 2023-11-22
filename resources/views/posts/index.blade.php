@@ -1,5 +1,4 @@
-<x-layout.main>
-    <h1>Posts page</h1>
+<x-layout.main title="Index page" h1="Posts">
     <a href="{{route('posts.create')}}">Add post</a>
     <hr>
     @foreach ($posts as $item)

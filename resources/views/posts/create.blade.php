@@ -1,5 +1,4 @@
-<x-layout.main>
-    <h1>Add post</h1>
+<x-layout.main title="New post" h1="Add new post">
     <a href="{{route('posts.index')}}">Back to posts</a>
     <hr>
     <form action="{{route('posts.store')}}" method="POST">
