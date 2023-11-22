@@ -18,7 +18,7 @@ Route::get('/posts', [Posts::class, 'index'])->name('posts.index');
 Route::get('/posts/create', [Posts::class, 'create'])->name('posts.create');
 Route::get('/posts/{id}', [Posts::class, 'show'])->name('posts.show');
 Route::get('/posts/{id}/edit', [Posts::class, 'edit'])->name('posts.edit');
-Route::delete('/posts/{id}/destroy', [Posts::class, 'destroy'])->name('posts.destroy');
+Route::delete('/posts/{id}', [Posts::class, 'destroy'])->name('posts.destroy');
 
-Route::post('/posts/store', [Posts::class, 'store'])->name('posts.store');
-Route::put('/posts/{id}/update', [Posts::class, 'update'])->name('posts.update');
+Route::post('/posts', [Posts::class, 'store'])->name('posts.store');
+Route::put('/posts/{id}', [Posts::class, 'update'])->name('posts.update');

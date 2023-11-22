@@ -4,18 +4,9 @@
 <form action="{{route('posts.update', $post->id)}}" method="POST">
     @csrf
     @method('PUT')
-    Title: <input type="text" name="title" id="title" value="{{$post->title}}"><br>
-    Content: <textarea name="content" id="content">{{$post->content}}</textarea> <br>
-    Price: <input type="text" name="price" id="price" value="{{$post->price}}"><br>
+    <x-input label="Title" name="title" default-value="{{$post->title}}"/>
+    <x-textarea label="Content" name="content" default-value="{{$post->content}}"/>
+    <x-input label="Price" name="price" default-value="{{$post->price}}"/>
     <input type="submit" value="Send">
     <hr>
-    @if ($errors->any())
-    <div style="color: red">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
 </form>

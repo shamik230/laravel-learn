@@ -21,10 +21,12 @@ class PostRequest extends FormRequest
      */
     public function rules(): array
     {
+        /* 32-bit int max value */
+        $maxPriceValue = 2 ** 31 - 1;
         return [
             'title'=> 'required|max:64|min:5',
             'content'=> 'required|max:500|min:10',
-            'price' => 'required|integer|min:0|multiple_of:1000',
+            'price' => "required|integer|min:0|max:$maxPriceValue|multiple_of:1000",
         ];
     }
 }

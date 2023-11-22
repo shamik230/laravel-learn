@@ -3,18 +3,9 @@
 <hr>
 <form action="{{route('posts.store')}}" method="POST">
     @csrf
-    Title: <input type="text" name="title" id="title" value="{{old('title')}}"><br>
-    Content: <textarea name="content" id="content">{{old('content')}}</textarea> <br>
-    Price: <input type="text" name="price" id="price" value="{{old('price')}}"><br>
-    <input type="submit" value="Send">
+    <x-input label="Title" name="title"/>
+    <x-textarea label="Content" name="content"/>
+    <x-input label="Price" name="price"/>
     <hr>
-    @if ($errors->any())
-    <div style="color: red">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
+    <input type="submit" value="Send">
 </form>

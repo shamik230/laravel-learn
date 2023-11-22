@@ -32,7 +32,7 @@ class Posts extends Controller
     {
         $post = Post::create($request->validated());
 
-        return redirect(route('posts.show', $post->id));
+        return redirect()->route('posts.show', $post->id);
     }
 
     /**
@@ -70,6 +70,6 @@ class Posts extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return redirect(route('posts.index'));
+        return redirect()->route('posts.index');
     }
 }
