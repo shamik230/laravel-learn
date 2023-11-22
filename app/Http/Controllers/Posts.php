@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\PostRequest;
 use Illuminate\Http\Request;
+use App\Models\Post;
 
 class Posts extends Controller
 {
@@ -11,24 +13,8 @@ class Posts extends Controller
      */
     public function index()
     {
-        $posts = [
-            [
-                "id"=> 1,
-                "title"=> "Hello World",
-                "content" => "First post"
-            ],
-            [
-                "id"=> 2,
-                "title"=> "Really nword",
-                "content" => "second post."
-            ],
-            [
-                "id"=> 3,
-                "title"=> "real.",
-                "content" => "THIRD POST"
-            ],
-        ];
-        return view('posts.index', ['posts' => $posts]);
+        $posts = Post::all();
+        return view('posts.index', compact('posts'));
     }
 
     /**
@@ -36,15 +22,17 @@ class Posts extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
-        //
+        $post = Post::create($request->validated());
+
+        return redirect(route('posts.show', $post->id));
     }
 
     /**
@@ -52,7 +40,8 @@ class Posts extends Controller
      */
     public function show(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -60,15 +49,18 @@ class Posts extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        return view('posts.edit', compact('post'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostRequest $request, string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->update($request->validated());
+        return view('posts.show', compact('post'));
     }
 
     /**
@@ -76,6 +68,8 @@ class Posts extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect(route('posts.index'));
     }
 }
