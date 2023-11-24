@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\PostRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\Posts\Save as PostRequest;
 use App\Models\Post;
 
 class Posts extends Controller
 {
+    protected array $categories = ['No category', 'Memes', 'News', 'Story'];
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +22,7 @@ class Posts extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        return view('posts.create', ['items' => $this->categories]);
     }
 
     /**
@@ -41,7 +41,8 @@ class Posts extends Controller
     public function show(string $id)
     {
         $post = Post::findOrFail($id);
-        return view('posts.show', compact('post'));
+        $category = $this->categories[$post->category];
+        return view('posts.show', compact('post', 'category'));
     }
 
     /**
@@ -50,7 +51,7 @@ class Posts extends Controller
     public function edit(string $id)
     {
         $post = Post::findOrFail($id);
-        return view('posts.edit', compact('post'));
+        return view('posts.edit', ['post' => $post, 'items'=> $this->categories]);
     }
 
     /**
@@ -60,7 +61,8 @@ class Posts extends Controller
     {
         $post = Post::findOrFail($id);
         $post->update($request->validated());
-        return view('posts.show', compact('post'));
+        $category = $this->categories[$post->category];
+        return view('posts.show', compact('post', 'category'));
     }
 
     /**

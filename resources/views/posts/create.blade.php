@@ -6,6 +6,7 @@
         <x-input label="Title" name="title"/>
         <x-textarea label="Content" name="content"/>
         <x-input label="Price" name="price"/>
+        <x-select label="Category" name="category" :items="$items"/>
         <hr>
         <input type="submit" value="Send">
     </form>

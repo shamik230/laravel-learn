@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Posts;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PostRequest extends FormRequest
+class Save extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,6 +27,7 @@ class PostRequest extends FormRequest
             'title'=> 'required|max:64|min:5',
             'content'=> 'required|max:500|min:10',
             'price' => "required|integer|min:0|max:$maxPriceValue|multiple_of:1000",
+            'category' => 'required|integer|min:0|max:3',
         ];
     }
 }
