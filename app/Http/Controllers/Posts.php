@@ -7,7 +7,6 @@ use App\Models\Post;
 
 class Posts extends Controller
 {
-    protected array $categories = ['No category', 'Memes', 'News', 'Story'];
     /**
      * Display a listing of the resource.
      */
@@ -22,7 +21,8 @@ class Posts extends Controller
      */
     public function create()
     {
-        return view('posts.create', ['items' => $this->categories]);
+        $categories = config('posts.categories');
+        return view('posts.create', ['items' => $categories]);
     }
 
     /**
@@ -41,7 +41,8 @@ class Posts extends Controller
     public function show(string $id)
     {
         $post = Post::findOrFail($id);
-        $category = $this->categories[$post->category];
+        $categories = config('posts.categories');
+        $category = $categories[$post->category];
         return view('posts.show', compact('post', 'category'));
     }
 
@@ -51,7 +52,8 @@ class Posts extends Controller
     public function edit(string $id)
     {
         $post = Post::findOrFail($id);
-        return view('posts.edit', ['post' => $post, 'items'=> $this->categories]);
+        $categories = config('posts.categories');
+        return view('posts.edit', ['post' => $post, 'items'=> $categories]);
     }
 
     /**
@@ -61,7 +63,8 @@ class Posts extends Controller
     {
         $post = Post::findOrFail($id);
         $post->update($request->validated());
-        $category = $this->categories[$post->category];
+        $categories = config('posts.categories');
+        $category = $categories[$post->category];
         return view('posts.show', compact('post', 'category'));
     }
 
