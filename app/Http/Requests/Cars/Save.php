@@ -25,11 +25,13 @@ class Save extends FormRequest
     {
         $categories = config('cars.categories');
         return [
-            'brand'=> 'required|min:2|max:64',
+            'brand_id'=> 'required|exists:brands,id',
             'model'=> 'required|min:1|max:64',
             'vin'=>  ['required', 'digits:4', $this->vinUniqueRule()],
             'description'=> 'required|min:10|max:512',
             'category' => ['required', Rule::in(array_keys($categories))],
+            'tags' => 'array',
+            'tags.*' => 'integer|exists:tags,id'
         ];
     }
 

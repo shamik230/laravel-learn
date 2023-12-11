@@ -6,6 +6,6 @@ return [
         'update' => 'Your car successfully updated!',
         'delete' => 'Your car deleted!',
         'restore' => 'Your car restored!',
-        'restoreFail' => 'Restore failed!',
+        'restoreFail' => 'Restore failed! VIN :vin already exists!',
     ]
 ];
