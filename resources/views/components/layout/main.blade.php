@@ -14,6 +14,12 @@
 </head>
 <body>
     <h1>{{ $h1 }}</h1>
+    <a href="{{route('cars.index')}}">Cars</a> |
+    <a href="{{route('cars.create')}}">Add car</a> |
+    <a href="{{route('cars.trash')}}">Trash can</a> |
+    <a href="{{route('brands.index')}}">Brands</a> |
+    <a href="{{route('tags.index')}}">Tags</a> 
+    <hr>
     {{ $slot }}
     @vite(['resources/js/app.js'])
 </body>

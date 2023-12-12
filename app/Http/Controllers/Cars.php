@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 // use Illuminate\Http\Request;
+use App\Enums\Cars\Status;
 use App\Models\Car;
 use App\Models\Brand;
 use App\Http\Requests\Cars\Save as SaveRequest;
@@ -17,6 +18,7 @@ class Cars extends Controller
      */
     public function index()
     {
+        // $cars = Car::ofActive()->with('brand')->orderByDesc('created_at')->get();
         $cars = Car::with('brand')->orderByDesc('created_at')->get();
         return view('cars.index', compact('cars'));
     }
@@ -85,6 +87,9 @@ class Cars extends Controller
      */
     public function destroy(Car $car)
     {
+        if(!$car->canDelete) {
+            return redirect()->route('cars.show', [$car->id])->with('statusDanger', trans('alerts.cars.cantDelete'));
+        }
         $car->delete();
         return redirect()->route('cars.index')->with('status', trans('alerts.cars.delete'));
     }

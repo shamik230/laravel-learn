@@ -1,4 +1,4 @@
-<x-layout.main title="Deleted cars page" h1="Cars">
+<x-layout.main title="Deleted cars page" h1="Trash">
     <x-status/>
     <a href="{{route('cars.index')}}">Index</a>
     <hr>
